@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Luca 的部落格：寫做東西的過程、喜歡的宇宙和遊戲。">
+  <title>部落格 — Luca</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">Luca</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="開啟選單">☰</button>
+      <nav class="site-nav" aria-label="主選單">
+        <a href="../index.html#works">作品集</a>
+        <a href="../index.html#about">關於我</a>
+        <a href="index.html">部落格</a>
+        <a href="../index.html#links">連結</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <p class="section-label">BLOG</p>
+        <h2>部落格</h2>
+        <p class="section-intro">寫做東西的過程，和一些喜歡的事物。文章不多，慢慢加。</p>
+
+        <!-- 新增文章的方法：複製一篇 blog/*.html 改內容，
+             再在下面列表加一個 <li class="post-item"> 即可。 -->
+        <ul class="post-list">
+          <li class="post-item">
+            <h3><a href="hsr-database.html">hsr-database 的 Liquid Glass 改版</a></h3>
+            <p>最近一次改版，把整個站換成了 visionOS Liquid Glass 風格的介面：玻璃面板、流體光球、立體浮出的卡片。寫一下改了什麼、為什麼這樣改。</p>
+            <a class="read-more" href="hsr-database.html">繼續閱讀 →</a>
+          </li>
+          <li class="post-item">
+            <h3><a href="gargantua.html">做一個卡岡圖雅，放在瀏覽器裡</a></h3>
+            <p>《星際效應》裡的卡岡圖雅大概是我心目中最浪漫的畫面。所以我做了一個可以互動的 3D 黑洞：重力透鏡、吸積盤、行星和衛星，都在瀏覽器裡轉。</p>
+            <a class="read-more" href="gargantua.html">繼續閱讀 →</a>
+          </li>
+          <li class="post-item">
+            <h3><a href="hyperion.html">HYPERION：一顆液態磁流體黑洞</a></h3>
+            <p>一個 Three.js 渲染展示頁：液態磁流體、量子矩陣、卡岡圖雅黑洞。和 Gemini 4 Argon 合作做的，後來又修了一版效能跟預設值。</p>
+            <a class="read-more" href="hyperion.html">繼續閱讀 →</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© Luca</span>
+      <span><a href="../index.html">回首頁</a></span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

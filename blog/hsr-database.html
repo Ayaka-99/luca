@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="hsr-database 最近一次改版，換上了 visionOS Liquid Glass 風格的介面。">
+  <title>hsr-database 的 Liquid Glass 改版 — Luca</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">Luca</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="開啟選單">☰</button>
+      <nav class="site-nav" aria-label="主選單">
+        <a href="../index.html#works">作品集</a>
+        <a href="../index.html#about">關於我</a>
+        <a href="index.html">部落格</a>
+        <a href="../index.html#links">連結</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <article class="article">
+      <div class="container">
+        <header>
+          <h1>hsr-database 的 Liquid Glass 改版</h1>
+          <p class="article-lede">把一個遊戲資料庫網站，換成 visionOS Liquid Glass 風格的介面。</p>
+        </header>
+        <div class="article-body">
+          <p>hsr-database 是我做的一個崩壞：星穹鐵道資料庫網站，查角色和光錐用的。角色列表可以依命途、屬性、星級篩選，也支援名稱搜尋；點進角色詳情有技能說明和星魂效果，光錐詳情則有各精煉等級的被動效果。資料目前更新到 4.6 版，部署在 Vercel 上。</p>
+          <p>最近的一次改版，整個站換上了 visionOS Liquid Glass 風格：玻璃質感的面板、背景裡三顆緩緩流動的光球、導覽列變成懸浮的玻璃 Dock，角色卡片則是 3D 立體浮出、滑鼠移上去會跟著傾斜，立繪還會破框探出來。整體感覺比以前更像一個「展示品」，而不只是一個查資料的工具。</p>
+          <p>改版是 Gemini 做的。我原本是用 Claude Code 起這個專案的，後來沒有 Claude 了，改版就交給 Gemini。風格換了，但功能沒變，查資料的流程還是一樣。</p>
+          <p>這個站還在慢慢修。首頁副標寫的懸浮預覽、篩選列在手機上的體驗，都是接下來想動的地方。網站做好之後很少有「完成」的一天，比較像是一個會一直長大的東西。</p>
+        </div>
+        <a class="back-link" href="index.html">← 回部落格</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© Luca</span>
+      <span><a href="../index.html">回首頁</a></span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

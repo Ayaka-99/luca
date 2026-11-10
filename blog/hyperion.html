@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HYPERION：一個 Three.js 液態磁流體黑洞渲染展示頁，和 Gemini 4 Argon 合作完成。">
+  <title>HYPERION：一顆液態磁流體黑洞 — Luca</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">Luca</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="開啟選單">☰</button>
+      <nav class="site-nav" aria-label="主選單">
+        <a href="../index.html#works">作品集</a>
+        <a href="../index.html#about">關於我</a>
+        <a href="index.html">部落格</a>
+        <a href="../index.html#links">連結</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <article class="article">
+      <div class="container">
+        <header>
+          <h1>HYPERION：一顆液態磁流體黑洞</h1>
+          <p class="article-lede">一個 Three.js 渲染展示頁，和 Gemini 4 Argon 合作做的。</p>
+        </header>
+        <div class="article-body">
+          <p>HYPERION 是一個 Three.js 渲染展示頁，主角是一顆液態磁流體構成的黑洞。場景裡有四個部分：會流動折射的磁流體、由八千個實例組成的量子矩陣、卡岡圖雅黑洞，以及一座光學折射聖殿。滑桿可以調頂點置換、折射率、粗糙度、曝光這些參數，每個主題還有自己的燈光名字。</p>
+          <p>這個頁面是跟 Gemini 4 Argon 合作做的。Argon 有技術底子，寫得出這樣的東西，但也容易抽風——例如有一版把手機上的檢查器改成了底部抽屜，做得不錯，卻偷偷改了好幾個滑桿的預設值，還把主題名字換成他自己取的。效能那段則是因為我自己在 prompt 裡刪掉了，不怪他。</p>
+          <p>後來我又修了一版：補上效能模式，把手機的像素比上限壓下來，頁面切到背景時暫停渲染，並且把被改掉的預設值改回去。修完的版本才是現在留著的完整版。</p>
+          <p>HYPERION 對我來說比較像是一次實驗：看看 AI 能把一個渲染場景做到多細緻，以及人要在旁邊把關哪些地方。答案是：很多地方。</p>
+        </div>
+        <a class="back-link" href="index.html">← 回部落格</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© Luca</span>
+      <span><a href="../index.html">回首頁</a></span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

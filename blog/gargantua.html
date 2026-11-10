@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="用 Three.js 和 Gemini 4 Argon 做了一個可以互動的卡岡圖雅 3D 黑洞。">
+  <title>做一個卡岡圖雅，放在瀏覽器裡 — Luca</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">Luca</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="開啟選單">☰</button>
+      <nav class="site-nav" aria-label="主選單">
+        <a href="../index.html#works">作品集</a>
+        <a href="../index.html#about">關於我</a>
+        <a href="index.html">部落格</a>
+        <a href="../index.html#links">連結</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <article class="article">
+      <div class="container">
+        <header>
+          <h1>做一個卡岡圖雅，放在瀏覽器裡</h1>
+          <p class="article-lede">《星際效應》裡的黑洞，大概是我心目中最浪漫的畫面。</p>
+        </header>
+        <div class="article-body">
+          <p>我喜歡宇宙和星星，《星際效應》超好看，而卡岡圖雅——那顆被吸積盤環繞的巨大黑洞——是整部電影裡我最忘不掉的畫面。所以我想把它做成一個可以動手玩的東西，放在瀏覽器裡。</p>
+          <p>這個 3D 黑洞模擬是用 Three.js 寫的，跟 Gemini 4 Argon 合作完成。黑洞周圍的星光會被重力透鏡扭曲，吸積盤緩緩旋轉，還有一顆行星帶著衛星繞著黑洞公轉。畫面可以拖曳、縮放，點一下黑洞會觸發引力震波；右邊的面板可以調轉速、輝光和曝光，左上角會顯示 FPS 和三角形數量。</p>
+          <p>做這個的過程有點波折。第一次生成的版本因為對話是臨時聊天，瀏覽器換頁之後就找不回來了，只好重送一次。重送的版本花了兩分多鐘生成，是一個完整的單一 HTML 檔，手機上也可以開——不過手機網路慢的時候，Three.js 從 CDN 載進來要等一下，畫面一開始是黑的，載好才會出現。</p>
+          <p>它不是什麼科學模擬，比較像是一個紀念品：把喜歡的畫面做成可以一直打開來看的東西。對我來說，這就是做網站最開心的地方。</p>
+        </div>
+        <a class="back-link" href="index.html">← 回部落格</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© Luca</span>
+      <span><a href="../index.html">回首頁</a></span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
