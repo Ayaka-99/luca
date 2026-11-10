@@ -50,6 +50,7 @@
             <h3>hsr-database</h3>
             <p>崩壞：星穹鐵道角色與光錐資料庫網站。角色列表可以依命途、屬性、星級篩選，也支援名稱搜尋；角色詳情有技能說明和星魂效果，光錐詳情有各精煉等級的被動效果。Next.js + TypeScript + Tailwind CSS，資料更新至 4.6 版，部署於 Vercel。</p>
             <div class="work-links">
+              <a href="https://hsr-database-preview.vercel.app" target="_blank" rel="noopener">Live Demo ↗</a>
               <a href="https://github.com/Ayaka-99/hsr-database" target="_blank" rel="noopener">GitHub ↗</a>
               <span class="repo">Ayaka-99 / hsr-database</span>
             </div>
@@ -58,7 +59,7 @@
           <article class="work-card reveal">
             <span class="work-tag">機器人 · JavaScript</span>
             <h3>Discord 機器人</h3>
-            <p>用 JavaScript 寫的 Discord 機器人，跑在 Google Cloud 的 VM 上。平常在 Discord 上幫忙處理一些事情，是第一個長期跑著的 side project。</p>
+            <p>用 JavaScript 寫的 Discord 機器人，跑在 Google Cloud 的 VM 上。幫伺服器統計發言、管每日簽到，還有一套虛擬金庫經濟和德州撲克、21 點、大逃殺小遊戲。角色是星穹列車派對車廂的吧台機器人「閉嘴」，是第一個長期跑著的 side project。</p>
             <div class="work-links">
               <a href="https://github.com/Ayaka-99/bot" target="_blank" rel="noopener">GitHub ↗</a>
               <span class="repo">Ayaka-99 / bot</span>
@@ -74,12 +75,8 @@
         <p class="section-label">ABOUT</p>
         <h2>關於我</h2>
         <div class="about-panel reveal">
-          <ul class="about-list">
-            <li><strong>逢甲大學學生</strong>，正在讀書。</li>
-            <li>喜歡<strong>宇宙和星星</strong>，喜歡<strong>文學</strong>，喜歡<strong>遊戲</strong>——最近在玩 Outer Wilds。</li>
-            <li>最喜歡的電影是<strong>《星際效應》</strong>，卡岡圖雅是心中的浪漫。</li>
-            <li>平常用 <strong>AI agent</strong> 做東西，把點子變成看得見的頁面。</li>
-          </ul>
+          <p>夜裡還醒著的時候，通常在折騰點什麼——修一個頁面、調一個機器人，或者在《Outer Wilds》裡繞著一顆星慢慢解謎。</p>
+          <p>最喜歡的電影是《星際效應》。卡岡圖雅是心中的浪漫——巨大、安靜，連光都會被它彎折。</p>
         </div>
       </div>
     </section>
@@ -97,13 +94,13 @@
             </span>
             <span class="link-arrow">↗</span>
           </a>
-          <div class="link-card reveal">
+          <button class="link-card reveal copy-card" type="button" id="discord-copy" aria-label="複製 Discord ID lance_508">
             <span>
               <span class="link-name">Discord</span><br>
-              <span class="link-handle">lance_508（在 Discord 搜尋加好友）</span>
+              <span class="link-handle">lance_508（點一下複製）</span>
             </span>
-            <span class="link-arrow">✦</span>
-          </div>
+            <span class="link-arrow">⧉</span>
+          </button>
         </div>
       </div>
     </section>
@@ -115,6 +112,8 @@
       <span>純靜態 HTML 寫成，部署於 Vercel</span>
     </div>
   </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="assets/js/main.js"></script>
 </body>

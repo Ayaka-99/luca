@@ -73,6 +73,38 @@
     requestAnimationFrame(draw);
   }
 
+  /* ── Discord ID 點一下複製 ── */
+  var discordBtn = document.getElementById("discord-copy");
+  var toast = document.getElementById("toast");
+  if (discordBtn && toast) {
+    var toastTimer = null;
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 1800);
+    }
+    function copyDiscord() {
+      var id = "lance_508";
+      function done() { showToast("已複製 lance_508"); }
+      function fail() { showToast("複製失敗，請手動複製 lance_508"); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(id).then(done, fail);
+      } else {
+        // 舊瀏覽器備援
+        var ta = document.createElement("textarea");
+        ta.value = id;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); done(); } catch (e) { fail(); }
+        document.body.removeChild(ta);
+      }
+    }
+    discordBtn.addEventListener("click", copyDiscord);
+  }
+
   /* ── 手機版導覽開關 ── */
   var toggle = document.querySelector(".nav-toggle");
   var header = document.querySelector(".site-header");
