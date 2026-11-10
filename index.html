@@ -10,15 +10,23 @@
 <body>
   <canvas id="stars" aria-hidden="true"></canvas>
 
+  <!-- 右上角重置按鈕：復原被黑洞吸走的文字與黑洞位置 -->
+  <button type="button" id="reset-btn" title="重置頁面文字與黑洞位置">↺ 重置</button>
+
+  <!-- 可自由拖動的黑洞（平時停在 hero 右側的 #bh-dock） -->
+  <div id="gargantua-wrapper" aria-label="可拖動的黑洞">
+    <canvas id="gargantua-canvas" width="520" height="520"></canvas>
+  </div>
+
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html">Luca</a>
+      <a class="brand" href="index.html" data-bh-immune="true">Luca</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-label="開啟選單">☰</button>
       <nav class="site-nav" aria-label="主選單">
-        <a href="#works">作品集</a>
-        <a href="#about">關於我</a>
-        <a href="blog/">部落格</a>
-        <a href="#links">連結</a>
+        <a href="#works" class="swallable-text">作品集</a>
+        <a href="#about" class="swallable-text">關於我</a>
+        <a href="blog/" class="swallable-text">部落格</a>
+        <a href="#links" class="swallable-text">連結</a>
       </nav>
     </div>
   </header>
@@ -26,45 +34,48 @@
   <main>
     <!-- Hero -->
     <section class="hero">
-      <canvas id="gargantua-canvas" aria-hidden="true"></canvas>
       <div class="hero-vignette" aria-hidden="true"></div>
-      <div class="container">
-        <p class="eyebrow">逢甲大學 · 學生</p>
-        <h1>Luca<span class="dot">.</span></h1>
-        <p class="lede">喜歡宇宙、星星、文學和遊戲。平常用 AI agent 把腦中的想像動手做出來——有時是一個資料庫網站，有時是一個黑洞。</p>
-        <div class="hero-actions">
-          <a class="btn" href="#works">看作品集</a>
-          <a class="btn btn-ghost" href="blog/">逛部落格</a>
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow swallable-text">逢甲大學 · 學生</p>
+          <h1 data-bh-immune="true"><span class="luca-char">L</span><span class="luca-char">u</span><span class="luca-char">c</span><span class="luca-char">a</span><span class="luca-char dot">.</span></h1>
+          <p class="lede swallable-text">喜歡宇宙、星星、文學和遊戲。平常用 AI agent 把腦中的想像動手做出來——有時是一個資料庫網站，有時是一個黑洞。</p>
+          <div class="hero-actions">
+            <a class="btn swallable-text" href="#works">看作品集</a>
+            <a class="btn btn-ghost swallable-text" href="blog/">逛部落格</a>
+          </div>
         </div>
+        <!-- 黑洞原本停靠位置（桌面版與手機版皆在右側） -->
+        <div id="bh-dock" aria-hidden="true"></div>
       </div>
     </section>
 
     <!-- 作品集 -->
     <section class="section" id="works">
       <div class="container">
-        <p class="section-label">PORTFOLIO</p>
-        <h2>作品集</h2>
-        <p class="section-intro">目前公開的兩個作品：一個遊戲資料庫網站，和一隻 Discord 機器人。</p>
+        <p class="section-label swallable-text">PORTFOLIO</p>
+        <h2 class="swallable-text">作品集</h2>
+        <p class="section-intro swallable-text">目前公開的兩個作品：一個遊戲資料庫網站，和一隻 Discord 機器人。</p>
 
         <div class="works-grid">
           <article class="work-card reveal">
-            <span class="work-tag">網站 · Next.js</span>
-            <h3>hsr-database</h3>
-            <p>崩壞：星穹鐵道角色與光錐資料庫網站。角色列表可以依命途、屬性、星級篩選，也支援名稱搜尋；角色詳情有技能說明和星魂效果，光錐詳情有各精煉等級的被動效果。Next.js + TypeScript + Tailwind CSS，資料更新至 4.6 版，部署於 Vercel。</p>
+            <span class="work-tag swallable-text">網站 · Next.js</span>
+            <h3 class="swallable-text">hsr-database</h3>
+            <p class="swallable-text">崩壞：星穹鐵道角色與光錐資料庫網站。角色列表可以依命途、屬性、星級篩選，也支援名稱搜尋；角色詳情有技能說明和星魂效果，光錐詳情有各精煉等級的被動效果。Next.js + TypeScript + Tailwind CSS，資料更新至 4.6 版，部署於 Vercel。</p>
             <div class="work-links">
-              <a href="https://hsr-database-preview.vercel.app" target="_blank" rel="noopener">Live Demo ↗</a>
-              <a href="https://github.com/Ayaka-99/hsr-database" target="_blank" rel="noopener">GitHub ↗</a>
-              <span class="repo">Ayaka-99 / hsr-database</span>
+              <a href="https://hsr-database-preview.vercel.app" target="_blank" rel="noopener" class="swallable-text">Live Demo ↗</a>
+              <a href="https://github.com/Ayaka-99/hsr-database" target="_blank" rel="noopener" class="swallable-text">GitHub ↗</a>
+              <span class="repo swallable-text">Ayaka-99 / hsr-database</span>
             </div>
           </article>
 
           <article class="work-card reveal">
-            <span class="work-tag">機器人 · JavaScript</span>
-            <h3>Discord 機器人</h3>
-            <p>用 JavaScript 寫的 Discord 機器人，跑在 Google Cloud 的 VM 上。幫伺服器統計發言、管每日簽到，還有一套虛擬金庫經濟和德州撲克、21 點、大逃殺小遊戲。角色是星穹列車派對車廂的吧台機器人「閉嘴」，是第一個長期跑著的 side project。</p>
+            <span class="work-tag swallable-text">機器人 · JavaScript</span>
+            <h3 class="swallable-text">Discord 機器人</h3>
+            <p class="swallable-text">用 JavaScript 寫的 Discord 機器人，跑在 Google Cloud 的 VM 上。幫伺服器統計發言、管每日簽到，還有一套虛擬金庫經濟和德州撲克、21 點、大逃殺小遊戲。角色是星穹列車派對車廂的吧台機器人「閉嘴」，是第一個長期跑著的 side project。</p>
             <div class="work-links">
-              <a href="https://github.com/Ayaka-99/bot" target="_blank" rel="noopener">GitHub ↗</a>
-              <span class="repo">Ayaka-99 / bot</span>
+              <a href="https://github.com/Ayaka-99/bot" target="_blank" rel="noopener" class="swallable-text">GitHub ↗</a>
+              <span class="repo swallable-text">Ayaka-99 / bot</span>
             </div>
           </article>
         </div>
@@ -74,11 +85,11 @@
     <!-- 關於我 -->
     <section class="section" id="about">
       <div class="container">
-        <p class="section-label">ABOUT</p>
-        <h2>關於我</h2>
+        <p class="section-label swallable-text">ABOUT</p>
+        <h2 class="swallable-text">關於我</h2>
         <div class="about-panel reveal">
-          <p>夜裡還醒著的時候，通常在折騰點什麼——修一個頁面、調一個機器人，或者在《Outer Wilds》裡繞著一顆星慢慢解謎。</p>
-          <p>最喜歡的電影是《星際效應》。卡岡圖雅是心中的浪漫——巨大、安靜，連光都會被它彎折。</p>
+          <p class="swallable-text">夜裡還醒著的時候，通常在折騰點什麼——修一個頁面、調一個機器人，或者在《Outer Wilds》裡繞著一顆星慢慢解謎。</p>
+          <p class="swallable-text">最喜歡的電影是《星際效應》。卡岡圖雅是心中的浪漫——巨大、安靜，連光都會被它彎折。</p>
         </div>
       </div>
     </section>
@@ -86,20 +97,20 @@
     <!-- 連結 -->
     <section class="section" id="links">
       <div class="container">
-        <p class="section-label">LINKS</p>
-        <h2>找到我</h2>
+        <p class="section-label swallable-text">LINKS</p>
+        <h2 class="swallable-text">找到我</h2>
         <div class="link-grid">
           <a class="link-card reveal" href="https://github.com/Ayaka-99" target="_blank" rel="noopener">
             <span>
-              <span class="link-name">GitHub</span><br>
-              <span class="link-handle">Ayaka-99</span>
+              <span class="link-name swallable-text">GitHub</span><br>
+              <span class="link-handle swallable-text">Ayaka-99</span>
             </span>
             <span class="link-arrow">↗</span>
           </a>
           <button class="link-card reveal copy-card" type="button" id="discord-copy" aria-label="複製 Discord ID lance_508">
             <span>
-              <span class="link-name">Discord</span><br>
-              <span class="link-handle">lance_508（點一下複製）</span>
+              <span class="link-name swallable-text">Discord</span><br>
+              <span class="link-handle swallable-text">lance_508（點一下複製）</span>
             </span>
             <span class="link-arrow">⧉</span>
           </button>
@@ -110,8 +121,8 @@
 
   <footer class="site-footer">
     <div class="container">
-      <span>© Luca</span>
-      <span>純靜態 HTML 寫成，部署於 Vercel</span>
+      <span class="swallable-text">© Luca</span>
+      <span class="swallable-text">純靜態 HTML 寫成，部署於 Vercel</span>
     </div>
   </footer>
 

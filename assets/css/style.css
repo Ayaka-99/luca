@@ -113,15 +113,6 @@ p:last-child { margin-bottom: 0; }
 
 /* ── Hero ── */
 .hero { position: relative; overflow: hidden; padding: 84px 0 56px; }
-/* 卡岡圖雅畫布：hero 內的絕對定位背景層，文字在其上 */
-#gargantua-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
 /* 文字易讀性遮罩：左側（文字區）較暗，右側（黑洞區）透明 */
 .hero-vignette {
   position: absolute;
@@ -131,6 +122,14 @@ p:last-child { margin-bottom: 0; }
   background: radial-gradient(ellipse at 22% 50%, rgba(4, 6, 12, 0.82) 0%, rgba(4, 6, 12, 0.42) 48%, transparent 78%);
 }
 .hero .container { position: relative; z-index: 2; }
+/* Hero 內文與黑洞停靠區並排 */
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.hero-text { flex: 1; min-width: 0; }
 .hero .eyebrow {
   color: var(--accent);
   font-size: 0.85rem;
@@ -143,6 +142,90 @@ p:last-child { margin-bottom: 0; }
   margin-bottom: 20px;
 }
 .hero h1 .dot { color: var(--accent); }
+/* Luca. 標題字元：果凍彈性物理用（黑洞靠近時會被拉扯變形） */
+.hero h1 .luca-char {
+  display: inline-block;
+  transform-origin: 50% 65%;
+  will-change: transform;
+}
+/* inline-block 會吃掉 letter-spacing，用 margin 補回字距 */
+.hero h1 .luca-char:not(:last-child) { margin-right: 0.06em; }
+
+/* ── 可拖動的黑洞與文字吞噬 ── */
+/* 右上角重置按鈕：復原被吸走的文字與黑洞位置 */
+#reset-btn {
+  position: fixed;
+  top: 66px;
+  right: 16px;
+  z-index: 55;
+  background: rgba(10, 12, 18, 0.82);
+  color: rgba(163, 173, 192, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 4px 9px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  user-select: none;
+}
+#reset-btn:hover {
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(18, 22, 32, 0.92);
+}
+#reset-btn:active { transform: scale(0.95); }
+
+/* 可自由拖動的黑洞（fixed，位置由 JS 跟著 #bh-dock 或手指走） */
+#gargantua-wrapper {
+  position: fixed;
+  width: 240px;
+  height: 240px;
+  z-index: 50;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+#gargantua-wrapper:active { cursor: grabbing; }
+#gargantua-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* 黑洞原本停靠位置（hero 右側） */
+#bh-dock {
+  width: 240px;
+  height: 240px;
+  flex-shrink: 0;
+  position: relative;
+  pointer-events: none;
+}
+
+/* 可被黑洞吞噬的文字字元 */
+.bh-char {
+  display: inline-block;
+  will-change: transform, opacity;
+  transition: color 0.15s ease;
+}
+.bh-char.swallowed { pointer-events: none; }
+
+/* 手機版：黑洞縮小，停在 hero 右上方，不擠在文字上方 */
+@media (max-width: 767px) {
+  #bh-dock {
+    position: absolute;
+    top: 28px;
+    right: -8px;
+    width: 165px;
+    height: 165px;
+  }
+  #gargantua-wrapper { width: 165px; height: 165px; }
+  .hero-inner { display: block; }
+}
 .hero .lede {
   font-size: 1.12rem;
   color: var(--muted);
