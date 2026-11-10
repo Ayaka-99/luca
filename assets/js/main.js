@@ -4,6 +4,23 @@
 (function () {
   "use strict";
 
+  /* ── 捲動淡入：有 JS 才啟用 ── */
+  document.documentElement.classList.add("js");
+  var revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && revealEls.length) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("in"); });
+  }
+
   /* ── 星空畫布 ── */
   var canvas = document.getElementById("stars");
   if (canvas) {
