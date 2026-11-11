@@ -188,6 +188,7 @@ p:last-child { margin-bottom: 0; }
   cursor: grab;
   user-select: none;
   touch-action: none;
+  transition: width 0.25s ease, height 0.25s ease;
 }
 #gargantua-wrapper:active { cursor: grabbing; }
 #gargantua-canvas {

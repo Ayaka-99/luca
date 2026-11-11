@@ -101,7 +101,7 @@
   }
 
   function stepLucaJellyPhysics(t) {
-    var jellyRadius = 185; // 黑洞觸發果凍形變的感應半徑
+    var jellyRadius = 185 * bhScale; // 黑洞觸發果凍形變的感應半徑（跟著黑洞長大）
     var stiffness = 0.16;  // 彈簧剛性（越低越軟 Q）
     var damping = 0.78;    // 阻尼（保留明顯的果凍回彈震盪）
 
@@ -342,6 +342,30 @@
   var hasDetachedFromDock = false;
   var dragOffset = { x: 0, y: 0 };
 
+  /* 黑洞成長：每吞一個字就長大一點（越吃越大），重置時縮回原尺寸 */
+  var swallowedCount = 0;
+  var bhScale = 1;
+  var bhBaseSize = 240;
+
+  function updateBhBaseSize() {
+    var dockW = bhDock.offsetWidth;
+    if (dockW > 0) bhBaseSize = dockW;
+  }
+
+  function applyBhSize() {
+    var size = Math.round(bhBaseSize * bhScale);
+    bhWrapper.style.width = size + "px";
+    bhWrapper.style.height = size + "px";
+    applyBhPosition();
+  }
+
+  function growBlackHole() {
+    swallowedCount++;
+    /* 遞減成長：越吃長越慢，上限約 2.4 倍 */
+    bhScale = 1 + 1.4 * (1 - Math.exp(-swallowedCount / 55));
+    applyBhSize();
+  }
+
   function syncToDock() {
     if (hasDetachedFromDock || isDragging) return;
     var rect = bhDock.getBoundingClientRect();
@@ -358,6 +382,7 @@
   }
 
   function refreshAllCoordinates() {
+    updateBhBaseSize();
     updateCharPositions();
     updateLucaCenters();
     if (!hasDetachedFromDock && !isDragging) {
@@ -376,8 +401,10 @@
     }
   }, { passive: true });
 
+  updateBhBaseSize();
   syncToDock();
   requestAnimationFrame(function () {
+    updateBhBaseSize();
     syncToDock();
     updateCharPositions();
     updateLucaCenters();
@@ -385,8 +412,8 @@
   window.addEventListener("load", refreshAllCoordinates);
 
   function evaluateTextSwallowing() {
-    var pullRadius = 150;
-    var swallowRadius = 38;
+    var pullRadius = 150 * bhScale;
+    var swallowRadius = 38 * bhScale;
 
     for (var i = 0; i < charRecords.length; i++) {
       var rec = charRecords[i];
@@ -405,6 +432,7 @@
 
         accretionFlash = Math.min(1, accretionFlash + 0.3);
         spawnAbsorptionParticle(rec.cx, rec.cy, bhPos.x, bhPos.y);
+        growBlackHole();
       } else if (dist < pullRadius) {
         var pullFactor = Math.pow(1 - (dist - swallowRadius) / (pullRadius - swallowRadius), 1.6);
         var angle = Math.atan2(dy, dx);
@@ -427,13 +455,14 @@
 
   // 給 Luca. 字元注入一次明顯的果凍衝擊波（當黑洞貼近移動時）
   function injectJellyImpulse() {
+    var impulseRadius = 175 * bhScale;
     for (var i = 0; i < lucaJellyStates.length; i++) {
       var st = lucaJellyStates[i];
       var dx = st.cx - bhPos.x;
       var dy = st.cy - bhPos.y;
       var dist = Math.hypot(dx, dy);
-      if (dist < 175) {
-        var strength = (1 - dist / 175) * 0.14;
+      if (dist < impulseRadius) {
+        var strength = (1 - dist / impulseRadius) * 0.14;
         st.vsx += (Math.random() - 0.45) * strength;
         st.vsy -= (Math.random() - 0.45) * strength;
         st.vskew += (Math.random() - 0.5) * strength * 45;
@@ -441,7 +470,7 @@
     }
   }
 
-  // 重置按鈕邏輯：安靜復原所有文字與黑洞位置
+  // 重置按鈕邏輯：安靜復原所有文字與黑洞位置（黑洞也縮回原尺寸）
   function resetAll() {
     for (var i = 0; i < charRecords.length; i++) {
       var rec = charRecords[i];
@@ -452,6 +481,11 @@
       rec.el.style.opacity = "1";
       rec.el.style.color = "";
     }
+
+    swallowedCount = 0;
+    bhScale = 1;
+    updateBhBaseSize();
+    applyBhSize();
 
     hasDetachedFromDock = false;
     bhWrapper.style.transition = "left 0.45s cubic-bezier(0.22, 1, 0.36, 1), top 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
