@@ -125,7 +125,8 @@ p:last-child { margin-bottom: 0; }
 /* Hero 內文與黑洞停靠區並排 */
 .hero-inner {
   display: flex;
-  align-items: center;
+  /* 改成靠上對齊，讓黑洞對齊「Luca.」標題而不是整塊文字的垂直中心 */
+  align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
 }
@@ -207,6 +208,14 @@ p:last-child { margin-bottom: 0; }
   pointer-events: none;
 }
 
+/* 桌面版：黑洞中心對齊「Luca.」標題中心（實測標題中心比 dock 中心高約 60px，
+   改靠上對齊後 dock 中心會落在標題中心下方約 17px，再用 margin-top 補回來） */
+@media (min-width: 768px) {
+  #bh-dock {
+    margin-top: -17px;
+  }
+}
+
 /* 可被黑洞吞噬的文字字元 */
 .bh-char {
   display: inline-block;
@@ -219,7 +228,8 @@ p:last-child { margin-bottom: 0; }
 @media (max-width: 767px) {
   #bh-dock {
     position: absolute;
-    top: 28px;
+    /* 實測 390px 時黑洞中心比「Luca.」標題中心低約 32px，top 從 28px 改為 -4px 讓兩者對齊 */
+    top: -4px;
     right: -8px;
     width: 165px;
     height: 165px;
@@ -438,6 +448,14 @@ button.link-card:focus-visible {
   .works-grid { grid-template-columns: 1fr 1fr; }
   .link-grid { grid-template-columns: 1fr 1fr; }
   .hero { padding: 110px 0 72px; }
+}
+
+/* 平板寬度（640–767px）仍用手機版佈局，但 hero 上方內距是 110px 不是 84px，
+   黑洞 top 用 20px 才能對齊標題中心（手機 390px 時則是 -4px） */
+@media (min-width: 640px) and (max-width: 767px) {
+  #bh-dock {
+    top: 20px;
+  }
 }
 
 @media (min-width: 760px) {
