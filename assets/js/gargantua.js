@@ -1079,7 +1079,11 @@
         rec.ty += (targetTy - rec.ty) * stepRate;
         rec.scaleRadial += (targetScaleRadial - rec.scaleRadial) * stepRate;
         rec.scaleTangential += (targetScaleTangential - rec.scaleTangential) * stepRate;
-        rec.radialAngle += shortestAngleDeltaDeg(rec.radialAngle, targetRadialDeg) * Math.min(1, stepRate * 1.35);
+        // 角度穩定保護：字元離黑洞中心太近時，atan2 的徑向角對微小位移極度敏感，
+        // 每幀追逐會讓旋轉來回跳動、看起來閃爍；太近時凍結角度（反正即將被捕獲）。
+        if (effDist > 8) {
+          rec.radialAngle += shortestAngleDeltaDeg(rec.radialAngle, targetRadialDeg) * Math.min(1, stepRate * 1.35);
+        }
         rec.glyphRot += shortestAngleDeltaDeg(rec.glyphRot, targetGlyphRot) * stepRate;
         rec.redshift += (pullFactor - rec.redshift) * stepRate;
 
@@ -1131,8 +1135,12 @@
   }
 
   // 供拖曳與捲動事件即時觸發一次吞噬與拉扯推進
+  // 注意：字元物理唯一的驅動來源是主動畫迴圈 animate() 裡的 stepCharPhysics(dtSec)。
+  // 這裡刻意不再呼叫 stepCharPhysics，因為 pointermove／scroll 若也推進物理，
+  // 同一幀內物理會被推進兩次（事件一次＋迴圈一次），且 dt 不一致，
+  // 造成黑洞附近字元的 transform 每幀來回跳動、看起來一直閃爍。
+  // 迴圈每幀都會讀到最新的 bhPos，拖曳反應只差不到一幀（約 16ms），人眼感覺不到。
   function evaluateTextSwallowing() {
-    stepCharPhysics(isReducedMotion ? 0.06 : 0.016);
   }
 
   // 給 Luca. 字元注入一次明顯的果凍衝擊波（當黑洞貼近移動時）
