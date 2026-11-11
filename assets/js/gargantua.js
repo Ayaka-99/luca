@@ -502,14 +502,17 @@
   // 綁定黑洞拖曳事件（只在真的點到黑洞可見範圍內才開始拖，
   // 避免 wrapper 方形透明角落被誤觸：黑洞長大後方形角落會變很大。
   // 黑洞可見形狀是橫向吸積盤（寬）＋縱向黑盤與透鏡弧（窄），
-  // 用橢圓貼合可見範圍，淡到看不見的光暈外緣也不會誤觸）
+  // 用橢圓貼合可見範圍，淡到看不見的光暈外緣也不會誤觸。
+  // 命中中心直接用 wrapper 實際渲染位置算，不用 bhPos，避免座標不同步）
   bhWrapper.addEventListener("pointerdown", function (e) {
     refreshAllCoordinates();
-    var size = bhWrapper.offsetWidth;
-    var rx = size * 0.45;
-    var ry = size * 0.28;
-    var nx = (e.clientX - bhPos.x) / rx;
-    var ny = (e.clientY - bhPos.y) / ry;
+    var rect = bhWrapper.getBoundingClientRect();
+    var cx = rect.left + rect.width * 0.5;
+    var cy = rect.top + rect.height * 0.5;
+    var rx = rect.width * 0.45;
+    var ry = rect.height * 0.28;
+    var nx = (e.clientX - cx) / rx;
+    var ny = (e.clientY - cy) / ry;
     if (nx * nx + ny * ny > 1) return;
     e.preventDefault();
     isDragging = true;
