@@ -499,10 +499,14 @@
   var resetBtn = document.getElementById("reset-btn");
   if (resetBtn) resetBtn.addEventListener("click", resetAll);
 
-  // 綁定黑洞拖曳事件
+  // 綁定黑洞拖曳事件（只在真的點到黑洞圓形範圍內才開始拖，
+  // 避免 wrapper 方形透明角落被誤觸：黑洞長大後方形角落會變很大）
   bhWrapper.addEventListener("pointerdown", function (e) {
-    e.preventDefault();
     refreshAllCoordinates();
+    var hitRadius = bhWrapper.offsetWidth * 0.46;
+    var distToCenter = Math.hypot(e.clientX - bhPos.x, e.clientY - bhPos.y);
+    if (distToCenter > hitRadius) return;
+    e.preventDefault();
     isDragging = true;
     hasDetachedFromDock = true;
     bhWrapper.style.transition = "";
